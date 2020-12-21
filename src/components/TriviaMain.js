@@ -3,12 +3,11 @@ import TriviaQuestion from "./TriviaQuestion";
 
 const TriviaMain = () => {
     const [questions, setQuestions] = useState(null);
-    const [score, setScore] = useState(0);
+    const [score, setScore] = useState(JSON.parse(localStorage.getItem("currentScore")).points);
     const [sessionToken, setSessionToken] = useState(null);
-    //score should also be stored in local storage
 
     useEffect(() => {
-        if(questions && questions.response_code === 3){
+        if (questions && questions.response_code === 3) {
             localStorage.removeItem(
                 "sessionInfo",
             )
@@ -38,7 +37,7 @@ const TriviaMain = () => {
         let mounted = true;
         fetch(`https://opentdb.com/api.php?amount=10&category=15&token=${sessionToken}`).then(response =>
             response.json().then(res => {
-                console.log(res)
+                    console.log(res)
                     if (mounted) {
                         setQuestions(res);
                     }
@@ -51,13 +50,32 @@ const TriviaMain = () => {
 
     }, [sessionToken])
 
+    useEffect(() => {
+        localStorage.setItem(
+            "currentScore",
+            JSON.stringify({
+                points: score,
+            })
+        );
+    },[score])
+
     const handleChangeScore = () => {
         setScore(prev => prev + 1);
     }
 
-    // const resetScore = () => {
-    //
-    // }
+    const resetSession = () => {
+        localStorage.removeItem(
+            "sessionInfo",
+        )
+        localStorage.setItem(
+            "currentScore",
+            JSON.stringify({
+                points:0
+            })
+        )
+        setScore(0);
+        setSessionToken(null);
+    }
 
     return (
         <>
@@ -67,6 +85,9 @@ const TriviaMain = () => {
                 return <TriviaQuestion key={index} question={el.question} correct={el.correct_answer}
                                        incorrect={el.incorrect_answers} updateScore={handleChangeScore}/>
             })}
+            <div>
+                <button onClick={resetSession}>Reset</button>
+            </div>
         </>
     );
 };

@@ -11,7 +11,6 @@ const TriviaQuestion = ({question, correct, incorrect, updateScore}) => {
     //Making sure the order of answers is always the same for True/False questions
 
     useEffect(() => {
-        allAnswers.forEach(answer => entities.decode(answer));
         if (allAnswers.length > 2) {
             allAnswers = allAnswers.sort(() => {
                 return 0.5 - Math.random()
@@ -40,7 +39,7 @@ const TriviaQuestion = ({question, correct, incorrect, updateScore}) => {
                                        el === correct ? "goodAnswer" : "wrongAnswer"
                                        : null
                                }
-                               value={el} onClick={handleOnClick} key={index}>{el} </button>
+                               value={el} onClick={handleOnClick} key={index}>{entities.decode(el)} </button>
             })}
 
         </>

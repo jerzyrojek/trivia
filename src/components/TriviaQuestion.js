@@ -11,8 +11,9 @@ const TriviaQuestion = ({question, correct, incorrect, updateScore}) => {
     //Making sure the order of answers is always the same for True/False questions
 
     useEffect(() => {
+        setChosen(false);
         if (allAnswers.length > 2) {
-            allAnswers = allAnswers.sort(() => {
+            allAnswers.sort(() => {
                 return 0.5 - Math.random()
             });
         }

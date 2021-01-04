@@ -25,25 +25,25 @@ const TriviaQuestion = ({question, correct, incorrect, updateScore}) => {
         setChosen(true);
         if (e.target.value === correct) {
             updateScore();
-        } else {
         }
     }
 
 
     return (
-        <>
-            <p>{entities.decode(question)}</p>
+        <div className="question">
+            <h3>{entities.decode(question)}</h3>
             {allAnswers.map((el, index) => {
-                return <button disabled={chosen}
+                return <button type="button"
+                               disabled={chosen}
                                className={
                                    chosen ?
-                                       el === correct ? "goodAnswer" : "wrongAnswer"
-                                       : null
+                                       el === correct ? "btn btn-success" : "btn btn-danger"
+                                       : "btn btn-dark"
                                }
                                value={el} onClick={handleOnClick} key={index}>{entities.decode(el)} </button>
             })}
+        </div>
 
-        </>
     );
 };
 

@@ -111,11 +111,9 @@ const TriviaMain = () => {
                 return <TriviaQuestion key={index} question={el.question} correct={el.correct_answer}
                                        incorrect={el.incorrect_answers} updateScore={handleChangeScore}/>
             })}
-            <div>
-                <button onClick={resetSession}>Reset</button>
-            </div>
-            <div>
-                <button onClick={nextTenQuestions}>Next 10</button>
+            <div style={{display:"flex"}}>
+                <button type="button" className="btn btn-primary" onClick={resetSession}>Reset</button>
+                <button type="button" className="btn btn-primary" onClick={nextTenQuestions}>Next 10</button>
             </div>
         </>
     );

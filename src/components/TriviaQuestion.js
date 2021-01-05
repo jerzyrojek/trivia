@@ -30,7 +30,7 @@ const TriviaQuestion = ({question, correct, incorrect, updateScore}) => {
 
 
     return (
-        <div className="question">
+        <div className="trivia__questions-item">
             <h3>{entities.decode(question)}</h3>
             {allAnswers.map((el, index) => {
                 return <button type="button"

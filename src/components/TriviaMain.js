@@ -104,18 +104,22 @@ const TriviaMain = () => {
     }
 
     return (
-        <>
-            <h1>Game Trivia!</h1>
-            <h2>Current score: {score}/{totalPointsPool}</h2>
-            {questions && questions.results.map((el, index) => {
-                return <TriviaQuestion key={index} question={el.question} correct={el.correct_answer}
-                                       incorrect={el.incorrect_answers} updateScore={handleChangeScore}/>
-            })}
-            <div style={{display:"flex"}}>
+        <div className="trivia container">
+            <div className="trivia__header">
+                <h1 className="trivia__header-title">Game Trivia!</h1>
+                <h2 className="trivia__header-score">Current score: {score}/{totalPointsPool}</h2>
+            </div>
+            <div className="trivia__questions">
+                {questions && questions.results.map((el, index) => {
+                    return <TriviaQuestion key={index} question={el.question} correct={el.correct_answer}
+                                           incorrect={el.incorrect_answers} updateScore={handleChangeScore}/>
+                })}
+            </div>
+            <div className="trivia__controls">
                 <button type="button" className="btn btn-primary" onClick={resetSession}>Reset</button>
                 <button type="button" className="btn btn-primary" onClick={nextTenQuestions}>Next 10</button>
             </div>
-        </>
+        </div>
     );
 };
 

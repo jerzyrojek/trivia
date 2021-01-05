@@ -1,0 +1,19 @@
+.trivia__header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+
+.btn {
+  margin-right: 0.5rem;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.trivia__controls {
+  margin-top:1rem;
+}

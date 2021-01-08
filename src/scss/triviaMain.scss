@@ -1,19 +1,36 @@
-.trivia__header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.trivia {
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #343a40;
+    box-shadow: 0 1px 3px -1px black;
+    color:white;
+  }
+
+  &__questions {
+    text-align: center;
+   &-item {
+     padding: 1rem;
+     margin: 1rem auto;
+     border: 1px solid white;
+   }
+  }
+
+  &__controls {
+    margin-top:1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:2rem;
+  }
 }
 
-
-
-
 .btn {
+  margin-top:0.5rem;
   margin-right: 0.5rem;
   &:last-child {
     margin-right: 0;
   }
 }
 
-.trivia__controls {
-  margin-top:1rem;
-}

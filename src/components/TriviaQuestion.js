@@ -31,14 +31,14 @@ const TriviaQuestion = ({question, correct, incorrect, updateScore}) => {
 
     return (
         <div className="trivia__questions-item">
-            <h3>{entities.decode(question)}</h3>
+            <h3 className="text-light">{entities.decode(question)}</h3>
             {allAnswers.map((el, index) => {
                 return <button type="button"
                                disabled={chosen}
                                className={
                                    chosen ?
                                        el === correct ? "btn btn-success" : "btn btn-danger"
-                                       : "btn btn-dark"
+                                       : "btn btn-light"
                                }
                                value={el} onClick={handleOnClick} key={index}>{entities.decode(el)} </button>
             })}

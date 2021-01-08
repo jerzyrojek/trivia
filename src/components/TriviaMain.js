@@ -104,12 +104,12 @@ const TriviaMain = () => {
     }
 
     return (
-        <div className="trivia container">
-            <div className="trivia__header">
+        <div className="trivia">
+            <div className="trivia__header navbar sticky-top">
                 <h1 className="trivia__header-title">Game Trivia!</h1>
                 <h2 className="trivia__header-score">Current score: {score}/{totalPointsPool}</h2>
             </div>
-            <div className="trivia__questions">
+            <div className="trivia__questions container">
                 {questions && questions.results.map((el, index) => {
                     return <TriviaQuestion key={index} question={el.question} correct={el.correct_answer}
                                            incorrect={el.incorrect_answers} updateScore={handleChangeScore}/>

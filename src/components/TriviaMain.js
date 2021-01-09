@@ -14,14 +14,6 @@ const TriviaMain = () => {
                 "sessionInfo",
             )
         }
-        if(localStorage.getItem("currentScore") !== null) {
-            setScore(JSON.parse(localStorage.getItem("currentScore")).points)
-        }
-
-        if(localStorage.getItem("total") !== null) {
-            setTotalPointsPool(JSON.parse(localStorage.getItem("total")).totalPointsAmount)
-        }
-
         if (localStorage.getItem("sessionInfo") !== null) {
             setSessionToken(
                 JSON.parse(localStorage.getItem("sessionInfo")).token)
@@ -55,52 +47,24 @@ const TriviaMain = () => {
             mounted = false;
         }
 
-    }, [sessionToken, totalPointsPool])
-
-    useEffect(() => {
-        localStorage.setItem(
-            "currentScore",
-            JSON.stringify({
-                points: score,
-            })
-        );
-
-        localStorage.setItem(
-            "total",
-            JSON.stringify({
-                totalPointsAmount: totalPointsPool,
-            })
-        );
-
-    }, [score, totalPointsPool])
+    }, [sessionToken])
 
     const handleChangeScore = () => {
         setScore(prev => prev + 1);
     }
 
-    const nextTenQuestions = () => {
-        setTotalPointsPool(prev => prev + 10)
-    }
 
     const resetSession = () => {
-        localStorage.removeItem(
-            "sessionInfo",
-        )
-        localStorage.setItem(
-            "currentScore",
-            JSON.stringify({
-                points: 0
-            })
-        )
-        localStorage.setItem(
-            "total",
-            JSON.stringify({
-                totalPointsAmount: 10
-            })
-        )
         setScore(0);
-        setTotalPointsPool(10);
-        setSessionToken(null);
+    }
+
+    // const validate = () => {
+    // need to add validation to see if all answers have been checked before submitting
+    // }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(`Congratulations you scored ${score}!`);
     }
 
     return (
@@ -110,15 +74,18 @@ const TriviaMain = () => {
                 <h2 className="trivia__header-score">Current score: {score}/{totalPointsPool}</h2>
             </div>
             <div className="trivia__questions container">
-                {questions && questions.results.map((el, index) => {
-                    return <TriviaQuestion key={index} question={el.question} correct={el.correct_answer}
-                                           incorrect={el.incorrect_answers} updateScore={handleChangeScore}/>
-                })}
+                <form onSubmit={handleSubmit}>
+                    {questions && questions.results.map((el, index) => {
+                        return <TriviaQuestion key={index} question={el.question} correct={el.correct_answer}
+                                               incorrect={el.incorrect_answers} updateScore={handleChangeScore}/>
+                    })}
+                    <div className="trivia__controls">
+                        <button type="button" className="btn btn-primary" onClick={resetSession}>Reset</button>
+                        <button type="submit" className="btn btn-primary">Finish</button>
+                    </div>
+                </form>
             </div>
-            <div className="trivia__controls">
-                <button type="button" className="btn btn-primary" onClick={resetSession}>Reset</button>
-                <button type="button" className="btn btn-primary" onClick={nextTenQuestions}>Next 10</button>
-            </div>
+
         </div>
     );
 };

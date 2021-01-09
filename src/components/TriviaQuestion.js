@@ -23,6 +23,7 @@ const TriviaQuestion = ({question, correct, incorrect, updateScore}) => {
 
     const handleOnClick = (e) => {
         setChosen(true);
+        e.target.style.border = "1px solid yellow";
         if (e.target.value === correct) {
             updateScore();
         }

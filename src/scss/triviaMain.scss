@@ -8,15 +8,6 @@
     color:white;
   }
 
-  &__questions {
-    text-align: center;
-   &-item {
-     padding: 1rem;
-     margin: 1rem auto;
-     border: 1px solid white;
-   }
-  }
-
   &__controls {
     margin-top:1rem;
     display: flex;
@@ -29,6 +20,9 @@
 .btn {
   margin-top:0.5rem;
   margin-right: 0.5rem;
+  &:disabled {
+    opacity:1;
+  }
   &:last-child {
     margin-right: 0;
   }

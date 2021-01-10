@@ -5,6 +5,7 @@ const TriviaMain = () => {
     const [questions, setQuestions] = useState(null);
     const [score, setScore] = useState(0);
     const [totalPointsPool, setTotalPointsPool] = useState(10);
+    const [answersGiven, setAnswersGiven] = useState(0);
     const [sessionToken, setSessionToken] = useState(null);
 
 
@@ -53,18 +54,22 @@ const TriviaMain = () => {
         setScore(prev => prev + 1);
     }
 
-
-    const resetSession = () => {
-        setScore(0);
+    const countAnswers = () => {
+        setAnswersGiven(prev => prev +1);
     }
 
-    // const validate = () => {
-    // need to add validation to see if all answers have been checked before submitting
-    // }
+    const validate = () => {
+        return answersGiven === totalPointsPool;
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(`Congratulations you scored ${score}!`);
+        let allQuestionsAnswered = validate();
+        if(allQuestionsAnswered) {
+            console.log(`You scored ${score}!`);
+        } else {
+            console.log("Please answer all questions!");
+        }
     }
 
     return (
@@ -77,15 +82,13 @@ const TriviaMain = () => {
                 <form onSubmit={handleSubmit}>
                     {questions && questions.results.map((el, index) => {
                         return <TriviaQuestion key={index} question={el.question} correct={el.correct_answer}
-                                               incorrect={el.incorrect_answers} updateScore={handleChangeScore}/>
+                                               incorrect={el.incorrect_answers} updateScore={handleChangeScore} count={countAnswers}/>
                     })}
                     <div className="trivia__controls">
-                        <button type="button" className="btn btn-primary" onClick={resetSession}>Reset</button>
                         <button type="submit" className="btn btn-primary">Finish</button>
                     </div>
                 </form>
             </div>
-
         </div>
     );
 };

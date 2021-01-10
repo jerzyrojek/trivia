@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const TriviaQuestion = ({question, correct, incorrect, updateScore}) => {
+const TriviaQuestion = ({question, correct, incorrect, updateScore, count}) => {
     const Entities = require('html-entities').AllHtmlEntities;
     const entities = new Entities();
     const [chosen, setChosen] = useState(false);
@@ -23,6 +23,7 @@ const TriviaQuestion = ({question, correct, incorrect, updateScore}) => {
 
     const handleOnClick = (e) => {
         setChosen(true);
+        count();
         e.target.style.border = "1px solid yellow";
         if (e.target.value === correct) {
             updateScore();
@@ -34,17 +35,17 @@ const TriviaQuestion = ({question, correct, incorrect, updateScore}) => {
         <div className="trivia__questions-item">
             <h3 className="text-light">{entities.decode(question)}</h3>
             {allAnswers.map((el, index) => {
-                return <button type="button"
-                               disabled={chosen}
-                               className={
-                                   chosen ?
-                                       el === correct ? "btn btn-success" : "btn btn-danger"
-                                       : "btn btn-light"
-                               }
-                               value={el} onClick={handleOnClick} key={index}>{entities.decode(el)} </button>
+                return <button
+                    type="button"
+                    disabled={chosen}
+                    className={
+                        chosen ?
+                            el === correct ? "btn btn-success" : "btn btn-danger"
+                            : "btn btn-light"
+                    }
+                    value={el} onClick={handleOnClick} key={index}>{entities.decode(el)}</button>
             })}
         </div>
-
     );
 };
 

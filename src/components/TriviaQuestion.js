@@ -18,7 +18,7 @@ const TriviaQuestion = ({question, correct, incorrect, updateScore, count}) => {
             });
         }
         //shuffling answers if there are more than 2, so the right one isn't always in the same place
-    }, [question])
+    }, [])
 
 
     const handleOnClick = (e) => {

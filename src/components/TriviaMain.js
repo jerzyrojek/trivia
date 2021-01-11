@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
+import {useHistory} from "react-router-dom";
 import TriviaQuestion from "./TriviaQuestion";
 
 const TriviaMain = () => {
     const [questions, setQuestions] = useState(null);
     const [score, setScore] = useState(0);
-    const [totalPointsPool, setTotalPointsPool] = useState(10);
+    const [totalPointsPool, setTotalPointsPool] = useState(null);
     const [answersGiven, setAnswersGiven] = useState(0);
     const [sessionToken, setSessionToken] = useState(null);
+    const history = useHistory();
 
 
     useEffect(() => {
@@ -36,6 +38,7 @@ const TriviaMain = () => {
 
     useEffect(() => {
         let mounted = true;
+        setTotalPointsPool(10);
         fetch(`https://opentdb.com/api.php?amount=10&category=15&token=${sessionToken}`).then(response =>
             response.json().then(res => {
                     if (mounted) {
@@ -66,7 +69,10 @@ const TriviaMain = () => {
         e.preventDefault();
         let allQuestionsAnswered = validate();
         if(allQuestionsAnswered) {
-            console.log(`You scored ${score}!`);
+            history.push({
+                pathname:"/results",
+                state:{finalScore:score}
+            })
         } else {
             console.log("Please answer all questions!");
         }

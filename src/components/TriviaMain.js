@@ -8,6 +8,8 @@ const TriviaMain = () => {
     const [totalPointsPool, setTotalPointsPool] = useState(null);
     const [answersGiven, setAnswersGiven] = useState(0);
     const [sessionToken, setSessionToken] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(false);
     const history = useHistory();
 
 
@@ -42,6 +44,7 @@ const TriviaMain = () => {
         fetch(`https://opentdb.com/api.php?amount=10&category=15&token=${sessionToken}`).then(response =>
             response.json().then(res => {
                     if (mounted) {
+                        setIsLoading(false);
                         setQuestions(res);
                     }
                 }
@@ -58,7 +61,7 @@ const TriviaMain = () => {
     }
 
     const countAnswers = () => {
-        setAnswersGiven(prev => prev +1);
+        setAnswersGiven(prev => prev + 1);
     }
 
     const validate = () => {
@@ -67,14 +70,15 @@ const TriviaMain = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setError(false);
         let allQuestionsAnswered = validate();
-        if(allQuestionsAnswered) {
+        if (allQuestionsAnswered) {
             history.push({
-                pathname:"/results",
-                state:{finalScore:score}
+                pathname: "/results",
+                state: {finalScore: score}
             })
         } else {
-            console.log("Please answer all questions!");
+            setError(true);
         }
     }
 
@@ -84,17 +88,30 @@ const TriviaMain = () => {
                 <h1 className="trivia__header-title">Game Trivia!</h1>
                 <h2 className="trivia__header-score">Current score: {score}/{totalPointsPool}</h2>
             </div>
-            <div className="trivia__questions container">
-                <form onSubmit={handleSubmit}>
-                    {questions && questions.results.map((el, index) => {
-                        return <TriviaQuestion key={index} question={el.question} correct={el.correct_answer}
-                                               incorrect={el.incorrect_answers} updateScore={handleChangeScore} count={countAnswers}/>
-                    })}
-                    <div className="trivia__controls">
-                        <button type="submit" className="btn btn-primary">Finish</button>
+            {isLoading ?
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border text-warning m-5" role="status">
+                        <span className="sr-only">Loading...</span>
                     </div>
-                </form>
-            </div>
+                </div>
+                :
+                <div className="trivia__questions container">
+                    <form onSubmit={handleSubmit}>
+                        {questions && questions.results.map((el, index) => {
+                            return <TriviaQuestion key={index} question={el.question} correct={el.correct_answer}
+                                                   incorrect={el.incorrect_answers} updateScore={handleChangeScore}
+                                                   count={countAnswers}/>
+                        })}
+                        <div className="trivia__controls">
+                            {error &&
+                            <div className="alert alert-danger" role="alert">
+                                Please answer all of the questions!
+                            </div>}
+                            <button type="submit" className="btn btn-primary">Finish</button>
+                        </div>
+                    </form>
+                </div>
+            }
         </div>
     );
 };

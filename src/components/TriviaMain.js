@@ -75,7 +75,7 @@ const TriviaMain = () => {
         if (allQuestionsAnswered) {
             history.push({
                 pathname: "/results",
-                state: {finalScore: score}
+                state: {finalScore: score, maxScore: totalPointsPool}
             })
         } else {
             setError(true);

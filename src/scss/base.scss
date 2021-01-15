@@ -1,8 +1,23 @@
 .container {
   max-width: 1200px;
-  margin:auto ;
+  margin: auto;
 }
 
 body {
-  background: rgb(33,33,33);
+  background: linear-gradient(322deg, #89043d, #7c77b9, #1d8a99, #0bc9cd);
+  background-size: 800% 800%;
+
+  animation: colorChange 32s ease infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    background-position: 14% 0
+  }
+  50% {
+    background-position: 87% 100%
+  }
+  100% {
+    background-position: 14% 0
+  }
 }

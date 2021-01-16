@@ -1,10 +1,10 @@
 import React from 'react';
 
 const ResultMessage = ({score, maxScore}) => {
-    const pointsPercentage = (score / 100) * maxScore;
+    const pointsPercentage = (score/100) * maxScore;
 
     const message = () => {
-        if (pointsPercentage <= 0.4) {
+        if(pointsPercentage <= 0.4) {
             return "It appears you need to play more video games!"
         } else if (pointsPercentage <= 0.7) {
             return "Not bad! That's a very decent score!"

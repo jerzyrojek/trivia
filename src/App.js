@@ -6,16 +6,16 @@ import ResultPage from "./components/ResultPage";
 
 
 function App() {
-    return (
-        <div className="App">
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path={ROUTES.HOME} component={TriviaMain}/>
-                    <Route path={ROUTES.RESULTS} component={ResultPage}/>
-                </Switch>
-            </BrowserRouter>
-        </div>
-    );
+  return (
+    <div className="App">
+        <BrowserRouter>
+            <Switch>
+                <Route exact path={ROUTES.HOME} component={TriviaMain}/>
+                <Route path={ROUTES.RESULTS} component={ResultPage}/>
+            </Switch>
+        </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

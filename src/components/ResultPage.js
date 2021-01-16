@@ -13,7 +13,8 @@ const ResultPage = (props) => {
     return (
         <div className="results">
             <div className="container results__content">
-                <h1 className="display-2">You got <span className="text-warning">{finalScore}</span> {finalScore !== 1 ? "points" : "point"}</h1>
+                <h1 className="display-2">You got <span
+                    className="text-warning">{finalScore}</span> {finalScore !== 1 ? "points" : "point"}</h1>
                 <ResultMessage score={finalScore} maxScore={totalPointsPool}/>
                 <button className="btn btn-lg btn-dark" onClick={playAgain}>Play again</button>
             </div>

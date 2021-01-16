@@ -1,32 +1,43 @@
 .trivia {
-  &__header{
+  &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #343a40;
     box-shadow: 0 1px 3px -1px black;
-    color:white;
+    color: white;
   }
 
   &__controls {
-    margin-top:1rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom:2rem;
+    margin-bottom: 2rem;
+
     .btn {
-      padding:1rem 3rem;
+      padding: 1rem 3rem;
+    }
+
+    &-error {
+      position: fixed;
+      top:10px;
+      left:50%;
+      z-index:1050;
+      transform:translate(-50%,0);
     }
   }
 }
 
 .btn {
-  margin-top:0.5rem;
+  margin-top: 0.5rem;
   margin-right: 0.5rem;
+
   &:disabled {
-    opacity:1;
+    opacity: 1;
   }
+
   &:last-child {
     margin-right: 0;
   }

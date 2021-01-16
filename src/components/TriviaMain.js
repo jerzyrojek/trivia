@@ -79,14 +79,18 @@ const TriviaMain = () => {
             })
         } else {
             setError(true);
+            setTimeout(() => {
+                setError(false);
+            }, 3000);
         }
+        //could probably use a class to add a fade animation
     }
 
     return (
         <div className="trivia">
             <div className="trivia__header navbar sticky-top">
                 <h1 className="trivia__header-title">Game Trivia!</h1>
-                <h2 className="trivia__header-score">Current score: <span className="text-warning">{score}/{totalPointsPool}</span></h2>
+                <h2 className="trivia__header-score">Current score: {score}/{totalPointsPool}</h2>
             </div>
             {isLoading ?
                 <div className="d-flex justify-content-center">
@@ -103,8 +107,8 @@ const TriviaMain = () => {
                                                    count={countAnswers}/>
                         })}
                         <div className="trivia__controls">
-                            {error &&
-                            <div className="alert alert-danger" role="alert">
+                            {error && answersGiven < 10 &&
+                            <div className="alert alert-danger trivia__controls-error" role="alert">
                                 Please answer all of the questions!
                             </div>}
                             <button type="submit" className="btn btn-dark">Finish</button>

@@ -1,8 +1,9 @@
 .trivia {
   &__questions {
     text-align: center;
+
     &-item {
-      background: #212121;
+      background: rgba(33, 33, 33, 0.7);
       padding: 1rem;
       margin: 1rem auto;
       border: 1px solid white;

@@ -8,7 +8,7 @@ import ResultPage from "./components/ResultPage";
 function App() {
   return (
     <div className="App">
-        <BrowserRouter>
+        <BrowserRouter basename="/trivia">
             <Switch>
                 <Route exact path={ROUTES.HOME} component={TriviaMain}/>
                 <Route path={ROUTES.RESULTS} component={ResultPage}/>

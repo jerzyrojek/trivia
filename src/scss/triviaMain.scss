@@ -43,3 +43,11 @@
   }
 }
 
+@media screen and (max-width: 450px) {
+  .trivia {
+    .btn {
+      margin-right: 0;
+    }
+  }
+}
+
